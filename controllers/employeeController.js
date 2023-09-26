@@ -106,7 +106,7 @@ const deleteEmployeeById = async (req, res) => {
     }
 
     // Convert the string to ObjectId
-    const id = mongoose.Types.ObjectId(idString);
+    const id = new mongoose.Types.ObjectId(idString);
 
     // Use the converted 'id' in your query to find and delete the employee
     const employee = await Employee.findByIdAndDelete(id);
