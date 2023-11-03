@@ -42,8 +42,8 @@ const createEmployee = async (req, res) => {
 // GET: User can get employee details by employee id
 const getEmployeeById = async (req, res) => {
   try {
-    const idString = req.params.eid;
-
+    const idString = req.params.id; // Use the route parameter name 'id'
+    console.log(idString);
     // Convert the string to ObjectId
     const id = new mongoose.Types.ObjectId(idString);
 

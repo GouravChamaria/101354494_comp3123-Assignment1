@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const config = require("./config");
 const userRoutes = require("./routes/userRoutes");
 const employeeRoutes = require("./routes/employeeRoutes");
-
+const cors = require("cors");
 const app = express();
 
 // Connect to MongoDB using mongoose
@@ -14,7 +14,13 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
+const corsOptions = {
+  origin: "http://localhost:3000", // or your frontend's URL
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+};
 
+app.use(cors(corsOptions));
 const db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -30,7 +36,7 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/emp", employeeRoutes);
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
